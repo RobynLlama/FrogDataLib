@@ -64,6 +64,12 @@ public static class FrogDataManager
     FrogDataPlugin.Log.LogMessage($"Loading slot {slot}");
     FileInfo dataPath = new(Path.Combine(PersistentPath.FullName, $"slot_{slot}.dat"));
 
+    if (!dataPath.Exists)
+    {
+      FrogDataPlugin.Log.LogInfo($"Skipping slot {slot}, no data to load");
+      return;
+    }
+
     try
     {
       using StreamReader reader = new(dataPath.FullName);
