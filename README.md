@@ -1,4 +1,4 @@
-# FrogDataLib for YAPYAP
+# 🐸 FrogDataLib for YAPYAP
 
 **FrogDataLib** is a lightweight data persistence framework for YAPYAP mods. It allows developers to save and load custom mod data into "sidecar" files, preventing save game pollution and ensuring mod data stays synchronized with the user's active save slot.
 
