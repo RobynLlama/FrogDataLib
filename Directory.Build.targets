@@ -63,7 +63,7 @@
     Publish to Thunderstore by including `-property:PublishTS=true` in the command.
   -->
   <Target Name="PackTS" AfterTargets="Build"
-    Condition="'$(Configuration)' == 'Release' And '$(ThunderstorePackable)' != 'false'">
+    Condition="'$(Configuration)' == 'Release' And '$(ThunderstorePackable)' != 'false' And '$(PackToTS)' == 'true'">
     <Error
       Text=" PackTS must be called with Release configuration."
       Condition="'$(Configuration)' != 'Release'"
