@@ -5,9 +5,9 @@ schemaVersion = "0.0.1"
 repository = "https://thunderstore.io"
 
 [package]
-namespace = "TODO: Fill in your Thunderstore team name here"
+namespace = "Robyn"
 name = "FrogDataLib"
-description = "TODO: Fill in short mod description."
+description = "A straightforward library for managing mod save data"
 websiteUrl = "" # TODO: Add a link to your mod repository here (optional)
 containsNsfwContent = false
 
