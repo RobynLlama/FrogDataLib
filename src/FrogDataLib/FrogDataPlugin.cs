@@ -1,6 +1,9 @@
-﻿using BepInEx;
+﻿using System.Linq;
+using BepInEx;
 using BepInEx.Logging;
 using FrogDataLib.DataManagement;
+using FrogDataLib.Patches;
+using HarmonyLib;
 
 namespace FrogDataLib;
 
@@ -28,5 +31,13 @@ public partial class FrogDataPlugin : BaseUnityPlugin
       Log.LogMessage("Creating persistent data path for FrogDataLib");
       FrogDataManager.PersistentPath.Create();
     }
+
+    Harmony patcher = new(Id);
+    patcher.PatchAll(typeof(MainMenuActionPatcher));
+    patcher.PatchAll(typeof(SaveManagerPatches));
+
+    Log.LogInfo($"Patch count is {patcher.GetPatchedMethods().Count()}");
+
+
   }
 }
