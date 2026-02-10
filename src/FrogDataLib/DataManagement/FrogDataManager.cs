@@ -158,7 +158,7 @@ public static class FrogDataManager
       FrogDataPlugin.Log.LogWarning($"""
       Ignoring an invalid save model from {guid}!
         The class '{typeof(TModel).Name}' is not marked as serializable and will never save correctly!
-        Please reference the FrogDataLib documentation @ <todo_link_here> for more information on structuring your save data
+        Please reference the FrogDataLib documentation @ https://github.com/RobynLlama/FrogDataLib for more information on structuring your save data
       """);
       return false;
     }
