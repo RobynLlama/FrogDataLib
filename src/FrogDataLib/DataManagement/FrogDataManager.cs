@@ -32,7 +32,7 @@ public static class FrogDataManager
   /// Fired when the user quits to the main menu and it is safe to destroy
   /// and reset your mod's state and wait
   /// </summary>
-  public static event Action? SessionEnded;
+  public static event Action? OnSessionEnded;
 
   internal static void SaveToSlot(int slot)
   {
@@ -102,6 +102,14 @@ public static class FrogDataManager
     if (dataPath.Exists)
       dataPath.Delete();
   }
+
+  internal static void SessionEnded()
+  {
+    FrogDataPlugin.Log.LogMessage("The session has ended");
+    OnSessionEnded?.Invoke();
+    MasterData.Clear();
+  }
+
 
   internal static bool TryGetModData<TModel>(string guid, [NotNullWhen(true)] out TModel? value) where TModel : FrogDataModel, new()
   {
