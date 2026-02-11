@@ -7,6 +7,9 @@ using HarmonyLib;
 
 namespace FrogDataLib;
 
+/// <summary>
+/// Intentionally left blank
+/// </summary>
 [BepInAutoPlugin]
 public partial class FrogDataPlugin : BaseUnityPlugin
 {

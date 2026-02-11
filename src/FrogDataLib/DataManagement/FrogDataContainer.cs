@@ -8,6 +8,9 @@ namespace FrogDataLib.DataManagement;
 /// <param name="guid">A globally unique ID</param>
 public class FrogDataContainer<TModel>(string guid) where TModel : FrogDataModel, new()
 {
+  /// <summary>
+  /// A globally unique ID for this container
+  /// </summary>
   public readonly string GUID = guid;
 
   /// <summary>

@@ -9,6 +9,9 @@ namespace FrogDataLib.DataManagement;
 public class FrogDataContainerSimple<TModel>(string guid) : FrogDataContainer<TModel>(guid) where TModel : FrogDataModel, new()
 {
 
+  /// <summary>
+  /// Your data model containing all the fields you defined for your save
+  /// </summary>
   public TModel Data = new();
 
   private void OnSaveGame() =>

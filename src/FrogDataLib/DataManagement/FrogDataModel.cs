@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace FrogDataLib.DataManagement;
 
+/// <summary>
+/// The base data model from which all save data must derive. This
+/// is in order to have the sentinel value for integrity checking
+/// </summary>
 [Serializable]
 public abstract class FrogDataModel
 {
