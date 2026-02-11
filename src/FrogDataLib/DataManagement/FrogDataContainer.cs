@@ -1,6 +1,12 @@
 namespace FrogDataLib.DataManagement;
 
-public sealed class FrogDataContainer<TModel>(string guid) where TModel : FrogDataModel, new()
+/// <summary>
+/// A Data container for easily saving and loading your mod data
+/// in response to save or load events.
+/// </summary>
+/// <typeparam name="TModel">Your data model type</typeparam>
+/// <param name="guid">A globally unique ID</param>
+public class FrogDataContainer<TModel>(string guid) where TModel : FrogDataModel, new()
 {
   public readonly string GUID = guid;
 
