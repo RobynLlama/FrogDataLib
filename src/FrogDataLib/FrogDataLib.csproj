@@ -10,6 +10,7 @@
     <!-- This is the version number of your mod. -->
     <Version>0.1.0</Version>
     <PackToTS>true</PackToTS>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <!--

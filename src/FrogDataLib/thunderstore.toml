@@ -24,6 +24,10 @@
     target="plugins/"
 
   [[build.copy]]
+    source="../../artifacts/bin/FrogDataLib/release/dev.mamallama.frogdatalib.xml"
+    target="plugins/"
+
+  [[build.copy]]
     source="../../CHANGELOG.md"
     target="/"
 
