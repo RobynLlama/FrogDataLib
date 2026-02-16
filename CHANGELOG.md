@@ -11,3 +11,8 @@
 ## v0.1.3
 
 - Adds AssetMUD for asset tracking in sidecar data
+
+## v0.2.0
+
+- Breaking: Switched backend JSON management to Newtonsoft.Json
+- Added Serialization callbacks for FrogDataModel
