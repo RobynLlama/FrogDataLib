@@ -2,11 +2,11 @@
 
 ## v0.1.0
 
-Initial release, the frogs have arrived
+- Initial release, the frogs have arrived
 
 ## v0.1.2
 
-- Adds FrogDataContainerEasy for simple data management
+- Adds FrogDataContainerSimple for simple data management
 
 ## v0.1.3
 
