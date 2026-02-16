@@ -121,6 +121,7 @@ public static class FrogDataManager
     try
     {
       value = JsonUtility.FromJson<TModel>(data);
+      value.OnAfterSerialize();
     }
     catch (Exception ex)
     {
@@ -168,6 +169,7 @@ public static class FrogDataManager
 
     try
     {
+      data.OnBeforeSerialize();
       var text = JsonUtility.ToJson(data);
       MasterData[guid] = text;
     }

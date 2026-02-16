@@ -19,4 +19,18 @@ public abstract class FrogDataModel
   /// </summary>
   [SerializeField]
   public int _frogSentinel = 8675309;
+
+  /// <summary>
+  /// This method is called after your data is loaded and
+  /// it is safe to rehydrate any complex structures that
+  /// unity serialization cannot handle
+  /// </summary>
+  public virtual void OnAfterSerialize() { }
+
+  /// <summary>
+  /// This method is called before passing your data model
+  /// to JSONUtility and should be used to decompose any
+  /// complex structures unity serialization cannot handle
+  /// </summary>
+  public virtual void OnBeforeSerialize() { }
 }
