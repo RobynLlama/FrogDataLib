@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace FrogDataLib.DataManagement;
@@ -13,6 +14,12 @@ namespace FrogDataLib.DataManagement;
 public static class FrogDataManager
 {
   internal static readonly DirectoryInfo PersistentPath = new(Path.Combine(Application.persistentDataPath, "FrogData"));
+  internal static JsonSerializerSettings SerialSettings = new()
+  {
+    TypeNameHandling = TypeNameHandling.Auto,
+    ObjectCreationHandling = ObjectCreationHandling.Replace
+  };
+
   private static Dictionary<string, string> MasterData = [];
 
   /// <summary>
@@ -42,11 +49,10 @@ public static class FrogDataManager
     OnBeginSaving?.Invoke();
 
     FileInfo dataPath = new(Path.Combine(PersistentPath.FullName, $"slot_{slot}.dat"));
-    var fileData = new FrogDataFile(MasterData);
 
     try
     {
-      var data = JsonUtility.ToJson(fileData);
+      var data = JsonConvert.SerializeObject(MasterData);
       using FileStream fs = new(dataPath.FullName, FileMode.Create, FileAccess.Write);
       using StreamWriter writer = new(fs, Encoding.UTF8);
       writer.Write(data);
@@ -74,15 +80,11 @@ public static class FrogDataManager
     {
       using StreamReader reader = new(dataPath.FullName);
       string data = reader.ReadToEnd();
-      FrogDataFile dataFile = JsonUtility.FromJson<FrogDataFile>(data);
 
-      if (dataFile._frogSentinel == 0 || !dataFile.TryParse(out var value))
-      {
-        FrogDataPlugin.Log.LogError($"Failed to deserialize data file from {dataPath.FullName} file may be corrupt or damaged");
-        return;
-      }
-
-      MasterData = value;
+      if (JsonConvert.DeserializeObject<Dictionary<string, string>>(data) is not Dictionary<string, string> value)
+        MasterData = [];
+      else
+        MasterData = value;
     }
     catch (Exception ex)
     {
@@ -120,7 +122,13 @@ public static class FrogDataManager
 
     try
     {
-      value = JsonUtility.FromJson<TModel>(data);
+      if (JsonConvert.DeserializeObject<TModel>(data) is not TModel item)
+      {
+        FrogDataPlugin.Log.LogError($"Unable to deserialize model for {guid} because the response from Newtonsoft.JSON was null. Data may be invalid or corrupt.");
+        return false;
+      }
+
+      value = item;
       value.OnAfterSerialize();
     }
     catch (Exception ex)
@@ -170,7 +178,7 @@ public static class FrogDataManager
     try
     {
       data.OnBeforeSerialize();
-      var text = JsonUtility.ToJson(data);
+      var text = JsonConvert.SerializeObject(data);
       MasterData[guid] = text;
     }
     catch (Exception ex)
