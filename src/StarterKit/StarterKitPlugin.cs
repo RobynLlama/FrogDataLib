@@ -41,6 +41,9 @@ public partial class StarterKitPlugin : BaseUnityPlugin
     FrogDataManager.OnLoadCompleted += () =>
     {
       Log.LogMessage("Loading my data");
+
+      //NOTE: I re-assign data to whatever GetModData sends me
+      //this is how you load your data with the standard container model
       data = cont.GetModData();
     };
 

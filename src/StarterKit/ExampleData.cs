@@ -3,15 +3,6 @@ using FrogDataLib.DataManagement;
 
 namespace StarterKit;
 
-/*
-  ALWAYS include [Serializable] on your derived class(es) if
-  they will be added to the save. Make sure to follow all the
-  rules for unity serialization, IE properties WILL NOT serialize
-  only fields and fields should be public. Dictionaries are also
-  not valid with unity serialization so you'll have to decompose
-  those into arrays or another intermediary
-*/
-[Serializable]
 public class ExampleData : FrogDataModel
 {
   /*
@@ -23,6 +14,9 @@ public class ExampleData : FrogDataModel
     use here because it will be populated just like this when returned
     from a save with no previous data. Consider this your blank slate
     or default state!
+
+    If you must modify or hydrate data you can use the Callbacks
+    provided in FrogDataModel such as OnAfterSerialize, etc
   */
   public string Name = "Test";
   public int Value = 100;
