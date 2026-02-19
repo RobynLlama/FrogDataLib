@@ -16,3 +16,9 @@
 
 - Breaking: Switched backend JSON management to Newtonsoft.Json
 - Added Serialization callbacks for FrogDataModel
+
+## v0.2.1
+
+- Remove check for serializable attribute
+- Remove sentinel from save files
+- Update documentation and starter kit for modders
