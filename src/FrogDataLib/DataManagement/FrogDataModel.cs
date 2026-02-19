@@ -1,3 +1,5 @@
+#pragma warning disable CS0414
+
 using System;
 using UnityEngine;
 
@@ -10,15 +12,21 @@ namespace FrogDataLib.DataManagement;
 [Serializable]
 public abstract class FrogDataModel
 {
+  [Obsolete("Legacy artifact of JsonUtility, not used for anything")]
+  [JsonProperty("_frogSentinel")]
+  private int FrogSentinel = 0;
+
   /// <summary>
-  /// This sentinel value allows me to detect if unity
-  /// decided to silently emit an empty object when
-  /// deserializing. Changing it serves no purpose but
-  /// if it is ever set to 0 your data will become invalid
-  /// and be discarded
+  /// This is used to suppress the old _frogSentinel value from
+  /// showing up in saved data anymore as UnitySerialization is
+  /// no longer used
   /// </summary>
-  [SerializeField]
-  public int _frogSentinel = 8675309;
+  /// <returns>FALSE</returns>
+  public bool ShouldSerializeFrogSentinel()
+  {
+    FrogDataPlugin.Log.LogMessage("Should Serialize Callback for FrogSentinel");
+    return false;
+  }
 
   /// <summary>
   /// This method is called after your data is loaded
@@ -27,7 +35,7 @@ public abstract class FrogDataModel
 
   /// <summary>
   /// This method is called before passing your data model
-  /// to JsonConvert
+  /// to Newtonsoft
   /// </summary>
   public virtual void OnBeforeSerialize() { }
 }
