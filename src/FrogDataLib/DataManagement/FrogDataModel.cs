@@ -1,15 +1,15 @@
 #pragma warning disable CS0414
 
 using System;
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace FrogDataLib.DataManagement;
 
 /// <summary>
-/// The base data model from which all save data must derive. This
-/// is in order to have the sentinel value for integrity checking
+/// The base data model from which all save data must derive.
+/// Provides serialization callbacks from before Newtonsoft
+/// was utilized
 /// </summary>
-[Serializable]
 public abstract class FrogDataModel
 {
   [Obsolete("Legacy artifact of JsonUtility, not used for anything")]
