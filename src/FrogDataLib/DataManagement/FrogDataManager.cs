@@ -137,44 +137,11 @@ public static class FrogDataManager
       return false;
     }
 
-    if (value._frogSentinel == 0)
-    {
-      var dataType = typeof(TModel).Name;
-
-      FrogDataPlugin.Log.LogError($"""
-      Failed to deserialize data for {guid} due to a sentinel failure, likely causes:
-        1. Class '{dataType}' may not be marked [Serializable]
-        2. The save data for {guid} may have been corrupted, damaged or from a different/incompatible version
-      """);
-
-      value = null;
-      return false;
-    }
-
     return true;
   }
 
   internal static bool TrySaveModData<TModel>(string guid, TModel data) where TModel : FrogDataModel, new()
   {
-    if (data._frogSentinel == 0)
-    {
-      FrogDataPlugin.Log.LogWarning($"Ignoring an invalid save model from {guid} due to a sentinel failure. This is likely a broken object, save data will not be updated!");
-      return false;
-    }
-
-    if (!typeof(TModel).IsSerializable)
-    {
-      FrogDataPlugin.Log.LogWarning($"""
-      Ignoring an invalid save model from {guid}!
-        The class '{typeof(TModel).Name}' is not marked as serializable and will never save correctly!
-        Please reference the FrogDataLib documentation @ https://github.com/RobynLlama/FrogDataLib for more information on structuring your save data
-      """);
-      return false;
-    }
-
-    //In case somebody messed with the sentinel value
-    data._frogSentinel = 8675309;
-
     try
     {
       data.OnBeforeSerialize();
